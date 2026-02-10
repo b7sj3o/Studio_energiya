@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from 'react'
+import React, { useMemo, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { trainersData, studioPhotosList, awardsPhotos, shuffleArray } from '../data'
 import './Home.css'
