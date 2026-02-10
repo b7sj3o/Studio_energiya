@@ -3,11 +3,11 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "homepage": "https://b7sj3o.github.io/Studio_energiya/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "homepage": "https://b7sj3o.github.io/studio_energiya",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
