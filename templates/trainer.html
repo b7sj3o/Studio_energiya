@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ trainer.name }}</title>
+    <style>
+        :root { --purple: #e0b0ff; --neon: #bf80ff; }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #0a0510; color: #fff; line-height: 1.6; }
+        .bg-photo { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url("{{ url_for('static', filename='background.jpg') }}") center/cover; z-index: -1; opacity: 0.15; }
+        .container { max-width: 900px; margin: 30px auto; padding: 40px 20px; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border-radius: 40px; border: 1px solid rgba(224, 176, 255, 0.1); }
+        .logo-nav { width: 80px; border-radius: 50%; border: 2px solid var(--purple); transition: 0.4s; }
+        .main-photo-container { width: 220px; height: 220px; border-radius: 50%; border: 4px solid var(--purple); overflow: hidden; margin: 30px auto; box-shadow: 0 0 40px var(--neon); display: flex; align-items: center; justify-content: center; }
+        .main-photo { width: 100%; height: 100%; object-fit: cover; }
+        .photo-anastasia { object-fit: cover !important; object-position: 50% 20%; transform: scale(1.0); }
+        .price-badge { background: rgba(224, 176, 255, 0.15); border: 1px solid var(--purple); color: var(--purple); padding: 8px 18px; border-radius: 50px; font-weight: bold; margin: 5px; display: inline-block; }
+        .schedule-card { background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 30px; border-left: 5px solid var(--purple); margin-bottom: 20px; text-align: left; transition: 0.3s; }
+        .schedule-card:hover { transform: translateX(10px); background: rgba(255, 255, 255, 0.08); }
+        .schedule-card h3 { color: var(--purple); margin: 0 0 10px 0; }
+        .back { display: inline-block; margin-top: 40px; color: var(--purple); text-decoration: none; font-weight: bold; border-bottom: 1px dashed var(--purple); }
+    </style>
+</head>
+<body>
+    <div class="bg-photo"></div>
+    <div class="container">
+        <a href="/"><img src="{{ url_for('static', filename='logo_new.jpg') }}" class="logo-nav"></a>
+        <div class="main-photo-container">
+            <img src="{{ url_for('static', filename=trainer.photo) }}" class="main-photo {% if trainer_id == 'anastasia' %}photo-anastasia{% endif %}">
+        </div>
+        <h1>{{ trainer.name }}</h1>
+        <div style="margin-bottom: 30px;">
+            {% for price in trainer.prices %}<span class="price-badge">{{ price }}</span>{% endfor %}
+        </div>
+        {% for section in trainer.schedule %}
+        <div class="schedule-card">
+            <h3>{{ section.title }}</h3>
+            <ul style="list-style: none; padding: 0;">
+                {% for info in section.details %}<li style="margin-bottom: 5px;">✦ {{ info }}</li>{% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+        <a href="/" class="back">← НАЗАД ДО СТУДІЇ</a>
+    </div>
+</body>
+</html>

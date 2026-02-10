@@ -1,0 +1,109 @@
+.trainer-bg {
+  opacity: 0.15;
+  filter: none;
+}
+
+.trainer-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border-radius: 40px;
+  border: 1px solid rgba(224, 176, 255, 0.1);
+}
+
+.logo-nav {
+  width: 80px;
+  border-radius: 50%;
+  border: 2px solid var(--purple);
+  transition: 0.4s;
+  display: inline-block;
+}
+
+.logo-nav:hover {
+  transform: scale(1.05);
+}
+
+.main-photo-container {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 4px solid var(--purple);
+  overflow: hidden;
+  margin: 30px auto;
+  box-shadow: 0 0 40px var(--neon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.main-photo-container.photo-anastasia .main-photo {
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+
+.price-badges {
+  margin-bottom: 30px;
+}
+
+.price-badge {
+  background: rgba(224, 176, 255, 0.15);
+  border: 1px solid var(--purple);
+  color: var(--purple);
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-weight: bold;
+  margin: 5px;
+  display: inline-block;
+}
+
+.schedule-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 25px;
+  border-radius: 30px;
+  border-left: 5px solid var(--purple);
+  margin-bottom: 20px;
+  text-align: left;
+  transition: 0.3s;
+}
+
+.schedule-card:hover {
+  transform: translateX(10px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.schedule-card h3 {
+  color: var(--purple);
+  margin: 0 0 10px 0;
+}
+
+.schedule-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.schedule-card li {
+  margin-bottom: 5px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 40px;
+  color: var(--purple);
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 1px dashed var(--purple);
+  transition: 0.3s;
+}
+
+.back-link:hover {
+  color: var(--neon);
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Energiya</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+        :root { --purple: #e0b0ff; --neon: #bf80ff; --glass: rgba(255, 255, 255, 0.05); }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #0a0510; color: #fff; text-align: center; overflow-x: hidden; scroll-behavior: smooth; }
+        .bg-photo { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url("{{ url_for('static', filename='background.jpg') }}") center/cover; z-index: -3; opacity: 0.22; filter: hue-rotate(280deg); }
+        .container { max-width: 1200px; margin: 20px auto; padding: 40px 15px; background: var(--glass); backdrop-filter: blur(25px); border-radius: 40px; border: 1px solid rgba(224, 176, 255, 0.15); }
+
+        /* Тренери */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 30px; }
+        .card { background: rgba(255, 255, 255, 0.03); padding: 25px; border-radius: 35px; border: 1px solid rgba(224, 176, 255, 0.15); text-decoration: none; color: #fff; transition: 0.4s; }
+        .photo-container { width: 180px; height: 180px; border-radius: 50%; border: 2px solid var(--purple); overflow: hidden; margin: 0 auto 15px; }
+        .photo { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Кубки */
+        .awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1000px; margin: 30px auto; }
+        .award-card { background: rgba(255,255,255,0.05); border-radius: 25px; overflow: hidden; border: 1px solid rgba(224, 176, 255, 0.2); transition: 0.4s; }
+        .award-img { width: 100%; height: 280px; object-fit: cover; }
+        .award-text { padding: 15px; color: var(--purple); font-weight: bold; }
+
+        /* Галерея */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; max-width: 1100px; margin: 0 auto; }
+        .gallery img { width: 100%; height: 200px; object-fit: cover; border-radius: 20px; transition: 0.3s; }
+        .gallery img:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--neon); }
+
+        .faq-section { max-width: 800px; margin: 60px auto; text-align: left; }
+        details { background: rgba(255,255,255,0.03); padding: 15px 25px; border-radius: 20px; margin-bottom: 10px; border: 1px solid rgba(224,176,255,0.1); cursor: pointer; }
+
+        .map-btn { display: inline-block; background: var(--purple); color: #000; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: bold; margin-top: 20px; }
+        .floating-btn { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #0088cc; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1000; }
+    </style>
+</head>
+<body>
+    <div class="bg-photo"></div>
+
+    <div class="container">
+        <img src="{{ url_for('static', filename='logo_new.jpg') }}" class="logo" style="width:110px; border-radius:50%; border: 2px solid var(--purple);" data-aos="zoom-in">
+        <h1 data-aos="fade-down">Studio Energiya</h1>
+
+        <div class="grid">
+            {% for id, trainer in trainers.items() %}
+            <div data-aos="fade-up" data-aos-delay="{{ loop.index0 * 100 }}">
+                <a href="{{ url_for('trainer_page', trainer_id=id) }}" class="card" style="display: block;">
+                    <div class="photo-container">
+                        <img src="{{ url_for('static', filename=trainer.photo) }}" class="photo">
+                    </div>
+                    <h3>{{ trainer.name }}</h3>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div data-aos="fade-up" style="margin-top: 80px;">
+            <h2 style="color: var(--purple);">Наші досягнення</h2>
+            <div class="awards-grid">
+                {% for award in awards %}
+                <div class="award-card">
+                    <a href="{{ url_for('static', filename=award.photo) }}" data-fancybox="awards">
+                        <img src="{{ url_for('static', filename=award.photo) }}" class="award-img">
+                    </a>
+                    <div class="award-text">{{ award.title }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="faq-section" data-aos="fade-up">
+            <h2 style="text-align: center; color: var(--purple);">Часті питання</h2>
+            <details><summary>Як почати тренування?</summary><div style="padding:10px;">Просто напишіть нам у Telegram або Instagram!</div></details>
+            <details><summary>Чи є абонементи?</summary><div style="padding:10px;">Так, у нас є разові заняття та вигідні абонементи на 8 та 12 занять.</div></details>
+        </div>
+
+        <h2 data-aos="fade-right">Фото нашої студії</h2>
+        <div class="gallery" data-aos="zoom-in">
+            {% for photo in photos %}
+            <a href="{{ url_for('static', filename=photo) }}" data-fancybox="gallery">
+                <img src="{{ url_for('static', filename=photo) }}" loading="lazy">
+            </a>
+            {% endfor %}
+        </div>
+
+        <div style="margin-top:50px;">
+            <h2>Контакти</h2>
+            <p>📍 м. Ромни, бульвар Шевченка, 6</p>
+            <a href="https://maps.google.com" target="_blank" class="map-btn">📍 Ми на карті</a>
+        </div>
+    </div>
+
+    <a href="https://t.me/studio_energiya" target="_blank" class="floating-btn">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+    </a>
+
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        Fancybox.bind("[data-fancybox]", { infinite: true });
+    </script>
+</body>
+</html>
