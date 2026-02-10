@@ -23,13 +23,11 @@
 
 ### GitHub Pages
 
-1. Збери проєкт: `npm run build`
-2. Включи GitHub Pages у репо (Settings → Pages → Source: deploy from branch), гілка зазвичай `gh-pages` або `main`, папка `/ (root)` або `docs` з вмістом `dist`.
-3. Назва репозиторію має збігатися з налаштуванням у `vite.config.js`: за замовчуванням це `Studio_energiya`. Якщо репо називається інакше, збирай так:
-   ```bash
-   VITE_BASE_URL=/твій-репо/ npm run build
-   ```
-4. Посилання будуть з хешем: `https://user.github.io/Studio_energiya/#/` та `...#/trainer/ludmila` — це нормально для GitHub Pages.
+Деплой через **GitHub Actions** (офіційний спосіб для Vite):
+
+1. У репо: **Settings → Pages → Build and deployment → Source** вибери **GitHub Actions**.
+2. Пуш у гілку `main` — workflow збере проєкт і опублікує папку `dist/`. Сайт буде за адресою `https://<user>.github.io/<repo>/`.
+3. Якщо репо не `Studio_energiya`, нічого міняти не потрібно: `base` підставляється з назви репозиторію автоматично.
 
 ## Структура
 
