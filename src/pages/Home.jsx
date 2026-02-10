@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { trainersData, studioPhotosList, awardsPhotos, shuffleArray } from '../data'
 import './Home.css'
 
-const STATIC = '/static'
+const STATIC = `${import.meta.env.BASE_URL}static`
 
 export default function Home() {
   const photos = useMemo(() => shuffleArray(studioPhotosList), [])

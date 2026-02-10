@@ -2,7 +2,7 @@ import { useParams, Link } from 'react-router-dom'
 import { trainersData } from '../data'
 import './Trainer.css'
 
-const STATIC = '/static'
+const STATIC = `${import.meta.env.BASE_URL}static`
 
 export default function Trainer() {
   const { trainerId } = useParams()
